@@ -1,5 +1,5 @@
 -- SQLBook: Markup
-# <span style="color:darkblue"> Lecture 16 - Introduction to SQL </span>
+# <span style="color:pink"> Lecture 16 - Introduction to SQL </span>
 
 <font size = "5">
 
@@ -9,7 +9,7 @@ SQL is a language specializing in database management
 - Typical task is to extract data from server
 - Many concepts are similar to Python
 -- SQLBook: Markup
-# <span style="color:darkblue"> I. Connect to Local Server </span>
+# <span style="color:pink"> I. Connect to Local Server </span>
 
 <font size="5"> 
 
@@ -30,13 +30,13 @@ panel on the left:
 
 <img src="figures/serverconnection_sql_vscode-3.png" alt="drawing" width="300"/>
 -- SQLBook: Markup
-# <span style="color:darkblue"> II. Create SQL Table from Scratch </span>
+# <span style="color:pink"> II. Create SQL Table from Scratch </span>
 -- SQLBook: Markup
 <font size = "5">
 
 Delete existing table
 -- SQLBook: Code
--- Active: 1698674191041@@127.0.0.1@5432@postgres
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- If the table already exists we can drop it:
 -- If it doesn't exist nothing happens
 -- System commands are in upper case and user defined
@@ -49,6 +49,7 @@ DROP TABLE IF EXISTS drivers;
 
 Create empty table from codebook
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- Create empty TABLE called "drivers"
 -- This example has five arguments separated by a comma
 -- that contain the "column_name" and "column_type", respectively
@@ -64,6 +65,7 @@ CREATE TABLE drivers(
 
 Add rows to table
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- "INSET INTO" adds rows with VALUES ... to the bottom of the table
 -- In SQL different lines need to be separated by a semicolon ";"
 -- You write system commands in capital letters to easily distinguish
@@ -85,6 +87,7 @@ View the table in the VSC "Database" Panel
 $\qquad$ <img src="figures/view_table_sql.png" alt="drawing" width="350"/>
 
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- In SQL, a set of tables is called a "Schema"
 -- Click "refresh" to see changes
 -- The pencil button edits column attributes
@@ -96,6 +99,7 @@ Try it yourself!
 
 - Add two/three more rows on your own
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- Add your name/nationality and your neighbors'
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
@@ -104,13 +108,14 @@ INSERT INTO drivers VALUES (5, 'Max Verstappen', 'Dutch', 51);
 INSERT INTO drivers VALUES (6, 'Juan Pablo Montoya', 'Colombian', 6);
 
 -- SQLBook: Markup
-# <span style="color:darkblue"> II. Dataset Operations </span>
+# <span style="color:pink"> II. Dataset Operations </span>
 
 
 <font size="5"> 
 
 Extracting columns from table
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- SELECT extracts certain COLUMNS
 -- FROM is used to indicate the source table
 
@@ -120,6 +125,7 @@ SELECT driver_id, nationality FROM drivers;
 
 Extract all columns from table
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- The symbol "*" is a shorthand for "all variables"
 SELECT * FROM drivers;
 -- SQLBook: Markup
@@ -127,6 +133,7 @@ SELECT * FROM drivers;
 
 Subsetting rows
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- The WHERE command evaluates logical conditions to subset rows
 SELECT * FROM drivers
 WHERE nationality = 'German';
@@ -144,6 +151,7 @@ WHERE (driver_id = 2);
 
 Aggregate
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- To compute aggregate statistics use a statistic function,
 -- such as SUM() or AVG() 
 -- The AS is an alias which assigns a name to the aggregate statistic
@@ -159,6 +167,7 @@ FROM drivers;
 
 Sort
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- Order in ascending order of victories
 -- Remember that * means that all columns are selected
 SELECT driver_name FROM drivers
@@ -175,6 +184,7 @@ ORDER BY victories DESC;
 
 
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- The following code would NOT work because we used double quotations
 -- "Double quotations" are used to refer to column names
 SELECT * FROM drivers 
@@ -187,16 +197,18 @@ Try it yourself!
 - Select "nationality" and "driver_id" for drivers <br>
 with more than 60 victories
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- Write your own code!
 SELECT driver_name, nationality, driver_id, victories FROM drivers;
 
 -- SQLBook: Markup
-# <span style="color:darkblue"> III. Groupby + Chaining </span>
+# <span style="color:pink"> III. Groupby + Chaining </span>
 
 <font size="5"> 
 
 Groupby + Aggregate
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- This command computes summary statistics by nationalitySELECT COUNT(*) AS num_rows,
 -- Including "nationality" (the grouping column) is optional in the select
 SELECT nationality,
@@ -211,6 +223,7 @@ GROUP BY nationality;
 
 Subsetting **after** aggregating
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- This command computes the same table as above
 -- then filters with HAVING
 -- HAVING is the command you use to subset *after* aggregating
@@ -229,6 +242,7 @@ HAVING SUM(victories) > 50;
 
 Subsetting **before** and **after** aggregating
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 -- HAVING is the command you use to subset *after* aggregating
 -- This differs from WHERE, which is used to subset *before* aggregating
 -- SQL differentiates the two types of subsetting
@@ -243,7 +257,7 @@ WHERE nationality = 'German'
 GROUP BY nationality
 HAVING SUM(victories) > 50;
 -- SQLBook: Markup
-# <span style="color:darkblue"> IV. Learning more </span>
+# <span style="color:pink"> IV. Learning more </span>
 
 <font size = "5">
 
@@ -257,6 +271,7 @@ Equivalence:
 $\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
 
 -- SQLBook: Code
+-- Active: 1711146271318@@127.0.0.1@5432@postgres
 
 -- BASIC SYNTAX:
 
